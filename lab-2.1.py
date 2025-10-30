@@ -1,28 +1,33 @@
+import random
+
+
 sum_len_name = 0
 name_author = input("Введите автора книги: ")
 book_vector = []
-m = []
+mas_books = []
+name_book = 1
+autor_book = 3
 with open("books.csv") as f:
     f.readline()
-    i = 0
-    for j in f.readlines():
-        m.append(list(j.split(";")))
-        if (len(m[i][1]) > 30):
+    for line in f: 
+        line = list(line.split(";"))
+        mas_books.append(line)
+        if (len(line[name_book]) > 30):
             sum_len_name += 1
-        if (m[i][3] == name_author):
-            book_vector.append(m[i][1])
-        i += 1
-for i in book_vector:
-    print(i, end="; ")
+        if (name_author == line[autor_book]):
+            book_vector.append(line[name_book]) 
 print(sum_len_name)
+print()
+for el in book_vector:
+    print(el, end="; ")
 
 
 with open("ans.txt", "w") as f:
-    vec = []
     count = 0
-    for i in range(0, len(m), 4):
+    random_strings = random.sample(mas_books, 20)
+    for string in random_strings:
         count += 1
-        print(str(count) + ".", m[i][3] + ".", m[i][1] + " -", m[i][6][6:10], file = f)
-        if (count == 20):
-            break
+        print(str(count) + ".", string[autor_book] + ".", string[name_book] + 
+              " -", string[6][6:10], file = f)
+
 

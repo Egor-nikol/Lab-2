@@ -1,28 +1,25 @@
 import csv
-from io import StringIO
 
 
-def comp(a):
-    return a[-2]
-
-m = []
+publisher = -3
+Book_Title = 1
+mas_id = []
 s = set()
 i = 0
 with open("books-en.csv") as f:
     f.readline()
     for j in f.readlines():
-        
-        m.append(list(csv.reader(StringIO(j), delimiter=';', quotechar='"'))[0])
-        s.add(m[i][-3])
+        mas_id.append(list(csv.reader([j], delimiter=';', quotechar='"'))[0])
+        s.add(mas_id[i][publisher])
         i += 1
 
-for i in sorted(s):
-    print(i, end = " ")
+for el in sorted(s):
+    print(el, end=" ")
  
 print()
 print("_" * 110)
 print()
 
-m.sort(key=comp, reverse=True)
+mas_id.sort(key=lambda el: el[-2], reverse=True)
 for i in range(20):
-    print(m[i][1])
+    print(mas_id[i][Book_Title])
